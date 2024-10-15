@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import '../Styling/BookDetails.css';
+import { Button } from 'primereact/button';
 const BookReader = () => {
   const { bookId } = useParams(); // Get bookId from route params
   const readerId = useSelector((state) => state.user.user.id); // Get readerId from user slice
+  const bookname=useSelector((state)=>state.book.selectedBook.title);
   const [progress, setProgress] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page for pagination
   const [bookContent, setBookContent] = useState(''); // Track book content for the current page
@@ -102,28 +104,56 @@ const BookReader = () => {
 
   return (
     <div>
-      <h1>Reading Book ID: {bookId}</h1>
-      <p className='booktext'>{bookContent}</p>
+      <h1 className='heading'>{bookname}'s content</h1>
+      
 
       {/* Pagination controls */}
-      <div>
-        <button
+      <div style={{marginTop:"10px",width:"fit-content",margin:"auto"}}>
+        <Button
           disabled={currentPage === 1}
           onClick={() => handlePageChange(currentPage - 1)}
+          size='small'
+          raised
         >
           Previous Page
-        </button>
+        </Button>
 
         <span>
           Page {currentPage} of {totalPages}
         </span>
 
-        <button
+        <Button
           disabled={currentPage === totalPages}
           onClick={() => handlePageChange(currentPage + 1)}
+          size='small'
+          raised
         >
           Next Page
-        </button>
+        </Button>
+      </div>
+      <p className='booktext'>{bookContent}</p> 
+      <div style={{marginTop:"10px",width:"fit-content",margin:"auto"}}>
+        <Button
+          disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+          size='small'
+          raised
+        >
+          Previous Page
+        </Button>
+
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+
+        <Button
+          disabled={currentPage === totalPages}
+          onClick={() => handlePageChange(currentPage + 1)}
+          size='small'
+          raised
+        >
+          Next Page
+        </Button>
       </div>
     </div>
   );

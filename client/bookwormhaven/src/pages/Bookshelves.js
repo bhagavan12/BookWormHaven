@@ -1,48 +1,13 @@
-// import axios from 'axios';
-// import React,{useEffect, useState} from 'react';
-// import { useSelector } from 'react-redux';
-
-// export default function Bookshelves() {
-//     const readerId = useSelector((state) => state.user.user.id);
-//     const base="http://localhost:3000/api/bookshelves";
-//     const [bookshelves,setBookshelves]=useState([]);
-//     useEffect(()=>{
-//         const bookres=async()=>{
-//               await axios.get(`${base}/${readerId}`)
-//               .then((res)=>{
-//                   if(res.data.length>0){
-//                       setBookshelves(res.data);
-//                       console.log(res.data);
-//                   }
-//               }).catch((err)=>{
-//                   console.log("err",err);
-//               })
-
-//         }
-//         bookres();
-//     },[]);
-//     return (
-//         <div>
-//             {bookshelves && (
-//                 bookshelves?.map((bookshelve)=>{
-//                     <li key={bookshelve.id} className='cardd'>
-//                         <h2>{bookshelve.name}</h2>
-//                     </li>
-//                 })
-//             )}
-//         </div>
-//     )
-// }
-
-// src/pages/BookshelfPage.js
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBookshelves, createBookshelf, deleteBookshelf } from '../features/bookshelfSlice';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import '../Styling/Bookshelves.css';
 import { useNavigate } from 'react-router-dom';
+import { Toast } from 'primereact/toast';
 const BookshelfPage = () => {
+    const toast = useRef(null);
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user); // Fetch user info from userSlice
     const { bookshelves } = useSelector((state) => state.bookshelves);
@@ -73,18 +38,27 @@ const BookshelfPage = () => {
             dispatch(createBookshelf({ userId: user.id, ...newShelf }));
             setNewShelf({ name: '', description: '' });
             setVisible(false);
+            showAdd()
         }
     };
 
     // Handle deleting a bookshelf
     const handleDeleteBookshelf = (id) => {
         dispatch(deleteBookshelf(id));
+        showRemove();
     };
     const handleNavigation = (id,shelfname) => {
         navigate(`/shelvesbooks/${id}/${shelfname}`); 
     }
+    const showAdd = () => {
+        toast.current.show({severity:'success', detail:'BookShelve added', life: 3000});
+    }
+    const showRemove = () => {
+        toast.current.show({severity:'success', detail:'BookShelve added', life: 3000});
+    }
     return (
         <div className="bookshelf-page">
+        <Toast ref={toast} style={{height:"15px",width:"100px",padding:"0px"}}/>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h2 icon="pi pi-times">{user.username}'s Bookshelves<i className="pi pi-bookmark-fill" style={{ fontSize: '1.5rem' }}></i></h2>
 
@@ -129,7 +103,7 @@ const BookshelfPage = () => {
                             <h3 id="bstitle">{shelf.name}<i className="pi pi-bookmark-fill" style={{ fontSize: '1rem' }}></i></h3>
                             <hr />
                             <p>{shelf.description}</p>
-                            <Button icon="pi pi-times" size="small" severity="danger" style={{ width: "fit-content", padding: "5px" }} onClick={() => handleDeleteBookshelf(shelf.id)} label='Delete' text ></Button>
+                            <Button icon="pi pi-times" size="small" severity="danger" style={{ width: "fit-content", padding: "5px"}} onClick={() => handleDeleteBookshelf(shelf.id)} label='Delete' text ></Button>
                             <Button size="small" style={{ width: "fit-content", padding: "5px", marginLeft: "1px" }} onClick={() => handleNavigation(shelf.id,shelf.name)} label='Open' text></Button>
                         </div>
                     ))

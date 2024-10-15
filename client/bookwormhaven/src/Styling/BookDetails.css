@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
 :root {
-    --blue-500: blue; /* Ensure the variable is defined */
+    --blue-500: blue;
+    /* Ensure the variable is defined */
 }
 
 .bookc {
     display: flex;
     gap: 50px;
     /* Align items vertically by default */
-    flex-direction: row; /* This can be omitted since row is the default */
+    flex-direction: row;
+    /* This can be omitted since row is the default */
 }
 
 .bookimg {
@@ -20,42 +23,61 @@
 #title {
     border-left: 10px solid black;
     font-family: 'Righteous';
-    background: transparent; 
-    transition: background 0.9s; 
+    background: transparent;
+    transition: background 0.9s;
 }
 
 #title:hover {
-    background: linear-gradient(to right, var(--primary-200), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255)); /* Gradient from left to right */
+    background: linear-gradient(to right, var(--primary-200), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255));
+    /* Gradient from left to right */
 }
 
 #st {
-    font-family: 'Righteous';    
+    font-family: 'Righteous';
 }
 
 /* Media query for mobile responsiveness */
 @media (max-width: 768px) {
     .bookc {
-        flex-direction: column; /* Change to column on smaller screens */
-        align-items: center; /* Center align items in column layout */
+        flex-direction: column;
+        /* Change to column on smaller screens */
+        align-items: center;
+        /* Center align items in column layout */
     }
 
     .bookimg {
         margin-left: 0px;
-        max-width: 100%; /* Make the image responsive */
-        height: auto; /* Maintain aspect ratio */
+        max-width: 100%;
+        /* Make the image responsive */
+        height: auto;
+        /* Maintain aspect ratio */
     }
 }
+
 .bookcstyle {
-    box-shadow: 1px 0px 2px rgb(72, 70, 70); /* Shadow effect */
-    border-radius: 10px;           /* Rounded corners */
-    padding: 10px;                 /* Inner spacing */
-    margin: 10px;                  /* Outer spacing */
+    box-shadow: 1px 0px 2px rgb(72, 70, 70);
+    /* Shadow effect */
+    border-radius: 10px;
+    /* Rounded corners */
+    padding: 10px;
+    /* Inner spacing */
+    margin: 10px;
+    /* Outer spacing */
 }
 
-.booktext{
-   
+.booktext {
+
     font-family: "Merriweather", serif;
-  font-weight: 400;
-  font-style: italic;
+    font-weight: 400;
+    font-style: italic;
+    padding: 10px;
+    max-width: 800px;
+    height: fit-content;
+    margin: auto;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    border-radius: 10px;
 }
-
+.p-toast-container{
+    width: 200px;
+}

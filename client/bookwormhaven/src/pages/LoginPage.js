@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../features/userSlice'; // Import the login action from the userSlice
 import { useNavigate,Link } from 'react-router-dom';
-
+import '../Styling/Auth.css';
+import {Button} from 'primereact/button'
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +28,6 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
@@ -41,11 +41,11 @@ const Login = () => {
           value={password} 
           onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit" disabled={loading}>Login</button>
+        <Button type="submit" label="Login" disabled={loading}></Button>
       </form>
       {loading && <p>Loading...</p>}
       {error && <p className="error">Error: {error}</p>}
-      <p> <Link to='/signup'>Signup</Link></p>
+      {/* <p> <Link to='/'>Signup</Link></p> */}
     </div>
   );
 };

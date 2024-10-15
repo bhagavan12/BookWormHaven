@@ -17,6 +17,8 @@ import Landingpage from './pages/Landingpage';
 import BookReader from './pages/BookReading';
 import Bookshelves from './pages/Bookshelves';
 import Bookshelf from './pages/BookShelvesBooks';
+import Books from './pages/Books';
+import AuthorsList from './pages/Author';
 function App() {
   const user = useSelector((state) => state.user?.user.username|| localStorage.getItem('token'));
  console.log("user",user);
@@ -26,8 +28,8 @@ function App() {
       {user && <Navbar />}
         <Routes>
           <Route path='/' element={<Landingpage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage />} />
+          {/* <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignupPage />} /> */}
           <Route path='/home' element={
             <ProtectedRoute>
               <HomePage />
@@ -61,6 +63,16 @@ function App() {
           <Route path='/shelvesbooks/:bookshelfId/:bookshelfName' element={
             <ProtectedRoute>
               <Bookshelf />
+            </ProtectedRoute>
+          } />
+          <Route path='/author' element={
+            <ProtectedRoute>
+              <AuthorsList />
+            </ProtectedRoute>
+          } />
+          <Route path='/books' element={
+            <ProtectedRoute>
+              <Books />
             </ProtectedRoute>
           } />
         </Routes>

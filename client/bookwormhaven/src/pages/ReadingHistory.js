@@ -176,14 +176,14 @@ export default function BookCarousel({ status }) {
 
     const bookTemplate = (book) => {
         return (
-            <div className='cardd'>
+            <div className='book-card'>
                 <div className="mb-3">
-                    <img src={book.cover_url} alt={book.title} className='image' />
+                    <img src={book.cover_url} alt={book.title} className='image' style={{height:"300px"}}/>
                 </div>
                 <div>
                     <h4 className="">{book.title}</h4>
                     <h6 className="">{book.authors}</h6>
-                    <h6>{book.current_page}/{book.total_pages}</h6>
+                    {/* <h6>{book.current_page}/{book.total_pages}</h6> */}
                     <ProgressBar value={Math.ceil((book.current_page/book.total_pages)*100)}></ProgressBar>
                     <div className="">
                         <Button label="Read for Free" className="p-button-rounded" onClick={() => handleNavigation(book)} raised/>
@@ -209,8 +209,7 @@ export default function BookCarousel({ status }) {
                 numVisible={3} 
                 numScroll={1} 
                 responsiveOptions={responsiveOptions} 
-                circular 
-                autoplayInterval={3000} 
+                circular
                 itemTemplate={bookTemplate} 
                 
             />

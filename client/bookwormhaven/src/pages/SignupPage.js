@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signup } from '../features/userSlice' // Import the signup action from the userSlice
 import { useNavigate,Link } from 'react-router-dom';
-
+import '../Styling/Auth.css';
+import { Button } from 'primereact/button';
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ const Signup = () => {
     try {
       const result = await dispatch(signup({ username, email, password })).unwrap(); // Dispatch the signup action
       if (result.message === 'User created successfully') {
-        navigate('/login'); // Navigate to login page if signup is successful
+        navigate('/'); // Navigate to login page if signup is successful
       }
     } catch (err) {
       console.error('Failed to sign up:', err);
@@ -27,8 +28,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup-container">
-      <h2>Sign Up</h2>
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
         <input 
           type="text" 
@@ -48,11 +48,11 @@ const Signup = () => {
           value={password} 
           onChange={(e) => setPassword(e.target.value)} 
         />
-        <button type="submit" disabled={loading}>Sign Up</button>
+        <Button label="SignUp" type="submit" disabled={loading}></Button>
       </form>
       {loading && <p>Loading...</p>}
       {error && <p className="error">Error: {error}</p>}
-      <p> <Link to='/login'>Login IN</Link></p>
+      {/* <p> <Link to='/'>Login IN</Link></p> */}
     </div>
   );
 };
