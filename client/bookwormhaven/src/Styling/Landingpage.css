@@ -142,7 +142,9 @@
     text-align: center;
 }
 
-
+.p-dialog{
+    width: 400px;
+}
 @media (max-width: 768px) {
     .landingpage {
         flex-direction: column;
@@ -159,7 +161,7 @@
     .fullc {
         width: fit-content;
         background-size: cover;
-        /* Ensure the background covers the entire area */
+        
         background-position: center;
     }
 
@@ -168,5 +170,8 @@
     }
     .content h1{
         font-size: 60px;
+    }
+    .p-dialog{
+        width: 500px;
     }
 }

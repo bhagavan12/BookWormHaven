@@ -2,7 +2,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Fetch all bookshelves for a user
 const base="http://localhost:3000"
 export const fetchBookshelves = createAsyncThunk(
   'bookshelves/fetchBookshelves',
@@ -13,7 +12,6 @@ export const fetchBookshelves = createAsyncThunk(
   }
 );
 
-// Create a new bookshelf
 export const createBookshelf = createAsyncThunk(
   'bookshelves/createBookshelf',
   async ({ userId, name, description }) => {
@@ -24,7 +22,6 @@ export const createBookshelf = createAsyncThunk(
   }
 );
 
-// Delete a bookshelf
 export const deleteBookshelf = createAsyncThunk(
   'bookshelves/deleteBookshelf',
   async (id) => {

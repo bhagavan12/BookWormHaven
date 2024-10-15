@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginUser, signupUser } from './api'; // Import the API functions
+import { loginUser, signupUser } from './api'; 
 
-// Initial state
 const initialState = {
   user: JSON.parse(localStorage.getItem('user')) || { 
     username: null, 
@@ -13,27 +12,25 @@ const initialState = {
   error: null,
 };
 
-// Async thunk for login
 export const login = createAsyncThunk('user/login', async ({ username, password }, thunkAPI) => {
-  try {
+  try{
     const data = await loginUser(username, password);
-    return data; // Expecting { user, token } in the response
-  } catch (error) {
+    
+    return data; 
+  }catch(error){
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
-// Async thunk for signup
 export const signup = createAsyncThunk('user/signup', async ({ username, email, password }, thunkAPI) => {
   try {
     const data = await signupUser(username, email, password);
-    return data; // Expecting { message } in the response
+    return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
-// User slice
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -66,7 +63,7 @@ const userSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.error;
       })
       .addCase(signup.pending, (state) => {
         state.loading = true;
@@ -77,7 +74,7 @@ const userSlice = createSlice({
       })
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload.error;
       });
   },
 });

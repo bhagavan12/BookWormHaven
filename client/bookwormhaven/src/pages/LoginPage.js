@@ -1,10 +1,10 @@
 // Login.js
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../features/userSlice'; // Import the login action from the userSlice
+import { login } from '../features/userSlice'; 
 import { useNavigate,Link } from 'react-router-dom';
 import '../Styling/Auth.css';
-import {Button} from 'primereact/button'
+import {Button} from 'primereact/button';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,17 +12,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const { loading, error } = useSelector(state => state.user); // Getting the loading and error states from Redux
+  const { loading, error } = useSelector(state => state.user); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await dispatch(login({ username, password })).unwrap(); // Dispatch the login action
+      const result = await dispatch(login({ username, password })).unwrap(); 
       if (result.token) {
-        navigate('/home'); // Navigate to the book list page if login is successful
+        navigate('/books'); 
       }
     } catch (err) {
       console.error('Failed to login:', err);
+      console.log("error",error);
     }
   };
 
@@ -44,7 +45,7 @@ const Login = () => {
         <Button type="submit" label="Login" disabled={loading}></Button>
       </form>
       {loading && <p>Loading...</p>}
-      {error && <p className="error">Error: {error}</p>}
+      {error && <p style={{color:'red'}}>{error}</p>}
       {/* <p> <Link to='/'>Signup</Link></p> */}
     </div>
   );

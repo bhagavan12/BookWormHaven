@@ -120,14 +120,14 @@ import { Carousel } from 'primereact/carousel';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { selectBook } from '../features/bookSlice'; // Assuming you're using Redux for book details
+import { selectBook } from '../features/bookSlice'; 
 import { ProgressBar } from 'primereact/progressbar';
 export default function BookCarousel({ status }) {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
-    const readerId = useSelector((state) => state.user.user.id); // Get readerId from userSlice
+    const readerId = useSelector((state) => state.user.user.id); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -170,8 +170,8 @@ export default function BookCarousel({ status }) {
     }, [status, readerId]);
 
     const handleNavigation = (book) => {
-        dispatch(selectBook(book)); // Dispatch the selected book to Redux
-        navigate('/bookdetails'); // Navigate to the book details page
+        dispatch(selectBook(book)); 
+        navigate('/bookdetails');
     };
 
     const bookTemplate = (book) => {

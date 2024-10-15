@@ -27,9 +27,8 @@ function App() {
       <Router>
       {user && <Navbar />}
         <Routes>
-          <Route path='/' element={<Landingpage />} />
-          {/* <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignupPage />} /> */}
+          {/* {(!user)? */}
+          <Route path='/' element={(!user)?<Landingpage />:<Books />} />
           <Route path='/home' element={
             <ProtectedRoute>
               <HomePage />

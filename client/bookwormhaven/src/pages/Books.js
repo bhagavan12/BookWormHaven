@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux'; // Import useDispatch from redux
-import { selectBook } from '../features/bookSlice'; // Import the selectBook action from the bookSlice
+import { useDispatch } from 'react-redux';
+import { selectBook } from '../features/bookSlice';
 import './Books.css';
 import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
 const BooksList = () => {
     const [books, setBooks] = useState([]);
-    const dispatch = useDispatch(); // Get the dispatch function
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
 
     const handleNavigation = (book) => {
-        dispatch(selectBook(book)); // Dispatch the selected book to Redux
-        navigate('/bookdetails'); // Navigate to the book details page
+        dispatch(selectBook(book)); 
+        navigate('/bookdetails'); 
     };
-    // Fetch books from API
     useEffect(() => {
         const fetchBooks = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/books');
-                setBooks(response.data); // Set the fetched books to the state
+                setBooks(response.data);
             } catch (error) {
                 console.error('Error fetching books:', error);
             }

@@ -10,15 +10,13 @@ import { Carousel } from 'primereact/carousel';
 import { Toast } from 'primereact/toast';
 const Bookshelf = () => {
     const toast = useRef(null);
-    const { bookshelfId, bookshelfName } = useParams(); // Get the bookshelf ID from the URL params
+    const { bookshelfId, bookshelfName } = useParams();
     const [books, setBooks] = useState([]);
-    const [bookToDelete, setBookToDelete] = useState(null);
-    const dispatch = useDispatch(); // Get the dispatch function
+    const dispatch = useDispatch(); 
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const base = "http://localhost:3000"
 
-    // Define responsive options for the Carousel
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -38,10 +36,8 @@ const Bookshelf = () => {
     ];
 
     useEffect(() => {
-        // Fetch bookshelf name and books on component mount
         const fetchBookshelfData = async () => {
             try {
-                // Fetch the books in the bookshelf by the bookshelfId
                 const booksResponse = await axios.get(`${base}/api/bookshelves/books/${bookshelfId}`);
                 setBooks(booksResponse.data);
                 console.log(booksResponse.data);
@@ -52,7 +48,6 @@ const Bookshelf = () => {
 
         fetchBookshelfData();
     }, [bookshelfId]);
-    // Handle removing a book from the bookshelf
     const handleRemoveBook = async (bookId) => {
         try {
             await axios.delete(`${base}/api/bookshelves/books/${bookshelfId}/${bookId}`);
@@ -66,10 +61,9 @@ const Bookshelf = () => {
         }
     };
     const handleNavigation = (book) => {
-        dispatch(selectBook(book)); // Dispatch the selected book to Redux
-        navigate('/bookdetails'); // Navigate to the book details page
+        dispatch(selectBook(book)); 
+        navigate('/bookdetails');
     };
-    // Define the template for how each book is displayed in the carousel
     const bookTemplate = (book) => {
         return (
             <div className="book-card" style={{ background: "rgba(255, 255, 255, 0.26)", boxShadow: " 0px 4px 30px rgba(0, 0, 0, 0.1)", backdropFilter: "blur(5px)",width:"250px" }}>
@@ -104,7 +98,7 @@ const Bookshelf = () => {
                     itemTemplate={bookTemplate}
                 />
             ) : (
-                <p>No books added yet.</p> // Display this if no books are found
+                <p>No books added yet.</p> 
             )}
         </div>
     );
