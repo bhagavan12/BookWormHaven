@@ -49,9 +49,9 @@
 // }
 // BooksList.js
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
+import { useLocation } from 'react-router-dom'; 
 import axios from 'axios';
-import Card from './Card'; // Import the Card component
+import Card from './Card'; 
 
 export default function BooksList() {
     const location = useLocation(); // Access the location object

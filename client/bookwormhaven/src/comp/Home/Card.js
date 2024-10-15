@@ -64,8 +64,8 @@ export default function Card({ book }) {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
-    setSelectedBook(book); // Set the selected book in context
-    navigate('/bookdetails'); // Navigate to book details page
+    setSelectedBook(book); 
+    navigate('/bookdetails'); 
   };
 
   return (

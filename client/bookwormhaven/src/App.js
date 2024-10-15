@@ -1,66 +1,71 @@
-// import logo from './logo.svg';
-// import './App.css';
-// import Navbar from './comp/Navbar/Navbar'
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import BookDetails from './comp/Home/BookDetails';
-// import { BookContext,BookProvider } from './comp/BookProvider';
-// import BooksList from './comp/Home/BooksList';
-// function App() {
-//   return (
-//     <BookProvider>
-//       <Router>
-//         <Navbar />
-//         <Routes>
-//           <Route path='/booklist' element={<BooksList/>}></Route>
-//           <Route path="/bookdetails" element={<BookDetails />}/>
-//         </Routes>
-//       </Router>
-//     </BookProvider>
-//   );
-// }
 
-// export default App;
-// App.js
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './comp/Navbar/Navbar';
+import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BookDetails from './comp/Home/BookDetails';
-import BooksList from './comp/Home/BooksList';
-import Signup from './comp/SignInUp/SignUp'; // Import Signup
-import Signin from './comp/SignInUp/Signin'; // Import Signin
-import ProtectedRoute from './comp/ProtectedRoute'; // Import ProtectedRoute
-import { BookProvider } from './comp/BookProvider'; // Import BookProvider
-
+import BookDetails from './pages/BookDetails';
+import BooksList from './pages/BooksList';
+import ProtectedRoute from './components/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import { useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
+import HomePage from './pages/HomePage';
+import Profile from './pages/Profile';
+import Landingpage from './pages/Landingpage';
+import BookReader from './pages/BookReading';
+import Bookshelves from './pages/Bookshelves';
+import Bookshelf from './pages/BookShelvesBooks';
 function App() {
+  const user = useSelector((state) => state.user?.user.username|| localStorage.getItem('token'));
+ console.log("user",user);
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Signin />} />
-        <Route
-          path='/booklist'
-          element={
+    <>
+      <Router>
+      {user && <Navbar />}
+        <Routes>
+          <Route path='/' element={<Landingpage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/home' element={
             <ProtectedRoute>
-              <BookProvider>
-                <BooksList />
-              </BookProvider>
+              <HomePage />
             </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/bookdetails"
-          element={
+          } />
+          <Route path='/booklist' element={
             <ProtectedRoute>
-              <BookProvider>
-                <BookDetails />
-              </BookProvider>
+              <BooksList />
             </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+          } />
+          <Route path='/bookdetails' element={
+            <ProtectedRoute>
+              <BookDetails />
+            </ProtectedRoute>
+          } />
+          <Route path='/profile' element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } />
+          <Route path='/bookreading/:bookId' element={
+            <ProtectedRoute>
+              <BookReader />
+            </ProtectedRoute>
+          } />
+          <Route path='/my-shelves' element={
+            <ProtectedRoute>
+              <Bookshelves />
+            </ProtectedRoute>
+          } />
+          <Route path='/shelvesbooks/:bookshelfId/:bookshelfName' element={
+            <ProtectedRoute>
+              <Bookshelf />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

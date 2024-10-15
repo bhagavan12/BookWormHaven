@@ -18,7 +18,7 @@ const Signup = () => {
                 password,
             });
             alert(response.data.message);
-            navigate('/'); 
+            navigate('/login'); 
         } catch (error) {
             console.error(error);
             alert('Error signing up');

@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/*booklist*/
+.slidercomp{
+  width: 1200px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  box-shadow: 0.1px 1px 5px black;
+  /* height: min-content; */
+  /* border: 1px solid black; */
+  border-radius: 10px;
+}
+/*booklist*/
+
+/*progressbar*/
+.p-progressbar{
+  height: 6px;
+}
+/*progressbar*/

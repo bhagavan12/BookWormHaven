@@ -144,7 +144,7 @@ export default function BookDetails() {
                         <p id='st'><strong >Languages:</strong> {selectedBook.languages}</p>
                         <p id='st'> <strong >Pages:</strong> {selectedBook.pages}</p>
                         <p id='st'><strong>Free to Read:</strong> {selectedBook.freeToRead ? "Yes" : "No"}</p>
-                        {/* <a href={selectedBook.freeToRead_url}>Read for Free</a> */}
+                        <a href={selectedBook.freeToRead_url}>Read for Free</a> 
                         <BookData url={selectedBook.freeToRead_url}></BookData>
                     </div>
                 </div>
