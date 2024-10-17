@@ -7,7 +7,7 @@ const Bookshelf = {
             const sql = 'INSERT INTO bookshelves (user_id, name, description) VALUES (?, ?, ?)';
             db.query(sql, [userId, name, description], (err, results) => {
                 if (err) return reject(err);
-                resolve(results.insertId); // Return the ID of the newly created bookshelf
+                resolve(results.insertId); 
             });
         });
     },
@@ -37,7 +37,7 @@ const Bookshelf = {
             const sql = 'DELETE FROM bookshelves WHERE id = ?';
             db.query(sql, [id], (err, results) => {
                 if (err) return reject(err);
-                resolve(results.affectedRows); // Return the number of rows affected
+                resolve(results.affectedRows); 
             });
         });
     },

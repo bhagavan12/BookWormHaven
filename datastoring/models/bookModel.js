@@ -76,10 +76,69 @@ const searchBooks = (keyword, callback) => {
     });
 };
 
+// Function to insert multiple books into the database
+const insertBooks = (booksDataArray, callback) => {
+  const query = `
+    INSERT INTO books (id,title, authors, publishDate, publishers, languages, pages, subjects, description, freeToRead, freeToRead_url, cover_url, genre)
+    VALUES ?
+  `;
+
+  // Prepare data for multiple books insertion
+  const values = booksDataArray.map(book => {
+    const {
+        id,
+      title,
+      authors,         // Array of author names
+      publishDate,
+      publishers,      // Array of publisher names
+      languages,       // Array of languages
+      pages,
+      subjects,        // Array of subjects
+      description,
+      freeToRead,
+      freeToRead_url,
+      cover_url,
+      genre
+    } = book;
+
+    // Return the array of values for each book
+    return [
+        id,
+      title,
+      JSON.stringify(authors),      // Convert to JSON string
+      publishDate,
+      JSON.stringify(publishers),   // Convert to JSON string
+      JSON.stringify(languages),     // Convert to JSON string
+      pages,
+      JSON.stringify(subjects),      // Convert to JSON string
+      description,
+      freeToRead,
+      freeToRead_url,
+      cover_url,
+      genre
+    ];
+  });
+
+  // Execute the query with multiple rows at once
+  connection.query(
+    query,
+    [values], // Use array of arrays
+    (error, results) => {
+      if (error) {
+        return callback(error);
+      }
+      callback(null, results);
+    }
+  );
+};
+
+
+
 module.exports = {
     getAllBooks,
     getBooksByGenre,
     getBooksByAuthor,
     getBooksByPublicationDate,
     searchBooks,
+    insertBooks
 };

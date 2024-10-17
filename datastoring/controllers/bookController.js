@@ -60,7 +60,6 @@ const fetchBooksByPublicationDate = (req, res) => {
     });
 };
 
-// Fetch books by keyword
 const searchBooks = (req, res) => {
     const { keyword } = req.query;
     bookModel.searchBooks(keyword, (err, books) => {
@@ -70,11 +69,27 @@ const searchBooks = (req, res) => {
         res.status(200).json(books);
     });
 };
-
+const addBooks = (req, res) => {
+    const booksDataArray = req.body.books; // Array of books should be sent in req.body.books
+  
+    // Validate input data
+    if (!Array.isArray(booksDataArray) || booksDataArray.length === 0) {
+      return res.status(400).json({ error: 'Please provide a valid array of books' });
+    }
+  
+    // Call the model function to insert books
+    bookModel.insertBooks(booksDataArray, (error, results) => {
+      if (error) {
+        return res.status(500).json({ error: 'Failed to insert books into the database', details: error });
+      }
+      res.status(201).json({ message: 'Books added successfully', results });
+    });
+  };
 module.exports = {
     fetchAllBooks,
     fetchBooksByGenre,
     fetchBooksByAuthor,
     fetchBooksByPublicationDate,
     searchBooks,
+    addBooks
 };

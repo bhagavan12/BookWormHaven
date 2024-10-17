@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
@@ -95,4 +95,9 @@
 /* Container of a message item */
 .p-toast-container {
   padding: 4px 8px;
+}
+
+
+.p-dropdown{
+  width: 200px;
 }

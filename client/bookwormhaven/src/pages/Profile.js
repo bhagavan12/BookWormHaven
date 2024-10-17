@@ -28,11 +28,13 @@ const Profile = () => {
      <UploadProfileImage readerId={user.id}/>
     <UpdatePassword readerId={user.id}/>
     </div> */}
-            <div className='profilecontainer'>
+            <div className='profilecontainer' style={{marginTop:'70px'}}>
                 <Card title={user.username}>
                     <div className='cardcontainer'>
                         <img src='https://library.sportingnews.com/styles/crop_style_16_9_desktop/s3/2023-12/Virat%20Kohli%20Test.jpg?h=920929c4&itok=SooosmZU' className='profileimage' preview></img>
-                        <div className='tab-container'>
+                        
+                    </div>
+                    <div className='tab-container'>
                             <TabView>
                                 <TabPanel header="Reading History">
                                     <TabView >
@@ -58,7 +60,6 @@ const Profile = () => {
                                 </TabPanel>
                             </TabView>
                         </div>
-                    </div>
                 </Card>
             </div>
         </>

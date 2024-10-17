@@ -6,6 +6,7 @@ import { selectBook } from '../features/bookSlice';
 import './Books.css';
 import { Tag } from 'primereact/tag';
 import { Button } from 'primereact/button';
+import { Skeleton } from 'primereact/skeleton';
 const BooksList = () => {
     const [books, setBooks] = useState([]);
     const dispatch = useDispatch(); 
@@ -18,7 +19,7 @@ const BooksList = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/books');
+                const response = await axios.get(`${process.env.REACT_APP_DB_HOST}/api/books`);
                 setBooks(response.data);
             } catch (error) {
                 console.error('Error fetching books:', error);
@@ -28,10 +29,11 @@ const BooksList = () => {
     }, []);
 
     return (
-        <div className="books-list">
+        <div className="books-list" style={{marginTop:'20px'}}>
             <h1 className='heading'>Books<i className='pi pi-book'></i></h1>
             <div className="books-grid">
-                {books.map((book) => (
+                {books && books.length>0?(
+                books.map((book) => (
                     <div key={book.id} className="book-card"  style={{ background: "rgba(255, 255, 255, 0.26)", boxShadow: " 0px 4px 30px rgba(0, 0, 0, 0.1)", backdropFilter: "blur(5px)" }}>
                         <div className="book-cover-container">
                             <img src={book.cover_url} alt={book.title} className="book-cover" />
@@ -46,7 +48,22 @@ const BooksList = () => {
                             <Link to={`/bookreading/${book.id}`} className='p-button' style={{fontSize:"small"}}>Read</Link>
                         </Button>
                     </div>
-                ))}
+                ))
+                ):(
+                    <div className="books-grid" style={{justifyItems:'center'}}>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    <Skeleton width="14rem" height="19rem"></Skeleton>
+                    
+                    </div>
+                )}
             </div>
         </div>
     );

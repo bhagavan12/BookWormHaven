@@ -29,11 +29,11 @@ function App() {
         <Routes>
           {/* {(!user)? */}
           <Route path='/' element={(!user)?<Landingpage />:<Books />} />
-          <Route path='/home' element={
+          {/* <Route path='/home' element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
-          } />
+          } /> */}
           <Route path='/booklist' element={
             <ProtectedRoute>
               <BooksList />

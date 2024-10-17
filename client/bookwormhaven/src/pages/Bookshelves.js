@@ -6,6 +6,7 @@ import { Dialog } from 'primereact/dialog';
 import '../Styling/Bookshelves.css';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from 'primereact/toast';
+import {Card} from 'primereact/card';
 const BookshelfPage = () => {
     const toast = useRef(null);
     const dispatch = useDispatch();
@@ -49,10 +50,10 @@ const BookshelfPage = () => {
         toast.current.show({severity:'success', detail:'BookShelve added', life: 3000});
     }
     const showRemove = () => {
-        toast.current.show({severity:'success', detail:'BookShelve added', life: 3000});
+        toast.current.show({severity:'success', detail:'BookShelve Deleted', life: 3000});
     }
     return (
-        <div className="bookshelf-page">
+        <div className="bookshelf-page"  style={{marginTop:'40px'}}>
         <Toast ref={toast} style={{height:"15px",width:"100px",padding:"0px"}}/>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h2 icon="pi pi-times">{user.username}'s Bookshelves<i className="pi pi-bookmark-fill" style={{ fontSize: '1.5rem' }}></i></h2>
@@ -96,7 +97,7 @@ const BookshelfPage = () => {
                             <h3 id="bstitle">{shelf.name}<i className="pi pi-bookmark-fill" style={{ fontSize: '1rem' }}></i></h3>
                             <hr />
                             <p>{shelf.description}</p>
-                            <Button icon="pi pi-times" size="small" severity="danger" style={{ width: "fit-content", padding: "5px"}} onClick={() => handleDeleteBookshelf(shelf.id)} label='Delete' text ></Button>
+                            <Button icon="pi pi-times" size="small" severity="danger" style={{ width: "fit-content", padding: "5px"}} onClick={() => handleDeleteBookshelf(shelf.id)} label='Delete' text></Button>
                             <Button size="small" style={{ width: "fit-content", padding: "5px", marginLeft: "1px" }} onClick={() => handleNavigation(shelf.id,shelf.name)} label='Open' text></Button>
                         </div>
                     ))

@@ -17,3 +17,11 @@
     height: 50px;
     margin-bottom: 10px;
 }
+.p-inputtext{
+    width: 290px;
+}
+@media (max-width:768px){
+    .p-inputtext{
+        width: 400px;
+    }
+}

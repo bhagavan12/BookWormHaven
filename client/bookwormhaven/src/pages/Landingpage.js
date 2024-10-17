@@ -49,7 +49,7 @@ export default function Landingpage() {
         <div className='content' style={{ background: "rgba(255, 255, 255, 0.26)", boxShadow: " 0px 4px 30px rgba(0, 0, 0, 0.1)", backdropFilter: "blur(5px)" }}>
           <h1>Welcome to Bookrary</h1>
           <p>Your Personal Book Haven – Curate, Read, and Connect</p>
-          <Button style={{ display: "flex", flexDirection: 'row', margin: "auto", gap: "5px" }} outlined>
+          <Button style={{ display: "flex", flexDirection: 'row', margin: "auto", gap: "5px" }} outlined severity='secondary'>
             <Button
               style={{ display: "flex", flexDirection: 'row', margin: "auto", gap: "5px" }}
               onClick={() => setLoginVisible(true)} 
@@ -58,7 +58,7 @@ export default function Landingpage() {
               Sign in
             </Button>
             <Button
-              style={{ display: "flex", flexDirection: 'row', margin: "auto", gap: "5px" }}
+              style={{ display: "flex", flexDirection: 'row', margin: "auto", gap: "5px" ,color:'black'}}
               onClick={() => setSignupVisible(true)} 
               // outlined
             >
@@ -82,6 +82,7 @@ export default function Landingpage() {
         visible={signupVisible}
         // style={{ width: '30vw' }}
         onHide={() => setSignupVisible(false)} // Close the modal
+        
       >
         <Signup />
       </Dialog>

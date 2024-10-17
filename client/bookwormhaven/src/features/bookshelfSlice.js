@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const base="http://localhost:3000"
+const base=process.env.REACT_APP_DB_HOST;
 export const fetchBookshelves = createAsyncThunk(
   'bookshelves/fetchBookshelves',
   async (userId) => {

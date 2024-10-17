@@ -20,7 +20,7 @@ const BookshelfBooks = {
             `;
             db.query(sql, [bookshelfId], (err, results) => {
                 if (err) return reject(err);
-                resolve(results); // Return the list of books in the specified bookshelf
+                resolve(results); 
             });
         });
     },
@@ -38,7 +38,7 @@ const BookshelfBooks = {
             const sql = 'DELETE FROM bookshelves_books WHERE bookshelf_id = ? AND book_id = ?';
             db.query(sql, [bookshelfId, bookId], (err, results) => {
                 if (err) return reject(err);
-                resolve(results.affectedRows); // Return the number of rows affected
+                resolve(results.affectedRows); 
             });
         })
     }

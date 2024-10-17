@@ -27,7 +27,11 @@ export const signup = createAsyncThunk('user/signup', async ({ username, email, 
     const data = await signupUser(username, email, password);
     return data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data);
+    console.log(error.response.data.error,"....");
+    if(error.response.data.error.indexOf("Duplicate")){
+      return thunkAPI.rejectWithValue("User already created");
+    }
+    return thunkAPI.rejectWithValue(error.response.data.error);
   }
 });
 
@@ -74,7 +78,11 @@ const userSlice = createSlice({
       })
       .addCase(signup.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.error;
+        //console.log(action.payload.error);
+        // if(action.payload.error.indexOf('created')){
+        //   state.error = "User already created";
+        // }
+        state.error=action.payload.error;
       });
   },
 });

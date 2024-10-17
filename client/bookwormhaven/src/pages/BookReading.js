@@ -16,7 +16,7 @@ const BookReader = () => {
   const THRESHOLD = 3000; 
   const fetchBookContent = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/book-content/${bookId}`);
+      const response = await axios.get(`${process.env.REACT_APP_DB_HOST}/api/book-content/${bookId}`);
       const content = response.data;
         console.log("content",content)
       const totalPageCount = Math.ceil(content.length / THRESHOLD);
@@ -30,7 +30,7 @@ const BookReader = () => {
   const fetchProgressAndInitialize = async (bookContentAll) => {
     try {
       const progressResponse = await axios.get(
-        `http://localhost:3000/api/progress/progress/${readerId}/${bookId}`
+        `${process.env.REACT_APP_DB_HOST}/api/progress/progress/${readerId}/${bookId}`
       );
 
       if (progressResponse.data) {
@@ -40,7 +40,7 @@ const BookReader = () => {
       const end = start + THRESHOLD;
         setBookContent(bookContentAll.slice(start,end));
       } else {
-        await axios.post(`http://localhost:3000/api/progress/update`, {
+        await axios.post(`${process.env.REACT_APP_DB_HOST}/api/progress/update`, {
           readerId,
           bookId,
           currentPage: 1, 
@@ -68,7 +68,7 @@ const BookReader = () => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
 
-      await axios.post(`http://localhost:3000/api/progress/update`, {
+      await axios.post(`${process.env.REACT_APP_DB_HOST}/api/progress/update`, {
         readerId,
         bookId,
         currentPage: newPage,
@@ -84,7 +84,7 @@ const BookReader = () => {
   };
 
   return (
-    <div>
+    <div style={{marginTop:'100px'}}>
       <h1 className='heading'>{bookname}'s content</h1>
       
 

@@ -41,7 +41,7 @@ const ReaderProgress = {
         // console.log("Parameters getCurrentReadingBooks:", [readerId]);
         return new Promise((resolve, reject) => {
             // const sql = 'SELECT * FROM reader_progress WHERE reader_id = ? AND status_of_book = "in_progress" ORDER BY start_date DESC';
-            const sql = 'SELECT rp.*, b.* FROM reader_progress rp JOIN books b ON rp.book_id = b.id WHERE rp.reader_id = ? AND rp.status_of_book = "in_progress" ORDER BY rp.start_date DESC';
+            const sql = `SELECT rp.*, b.* FROM reader_progress rp JOIN books b ON rp.book_id = b.id WHERE rp.reader_id = ? AND rp.status_of_book = 'in_progress' ORDER BY rp.start_date DESC`;
             // console.log("SQL Query:", sql);
             db.query(sql, [readerId], (err, results) => {
                 if (err) {
@@ -58,7 +58,7 @@ const ReaderProgress = {
     getCompletedBooks: (readerId) => {
         // console.log("Parameters getCompletedBooks:", [readerId]);
         return new Promise((resolve, reject) => {
-            const sql = 'SELECT rp.*, b.* FROM reader_progress rp JOIN books b ON rp.book_id = b.id WHERE rp.reader_id = ? AND rp.status_of_book = "completed" ORDER BY rp.start_date DESC';
+            const sql = `SELECT rp.*, b.* FROM reader_progress rp JOIN books b ON rp.book_id = b.id WHERE rp.reader_id = ? AND rp.status_of_book = 'completed' ORDER BY rp.start_date DESC`;
             // const sql = 'SELECT * FROM reader_progress WHERE reader_id = ? AND status_of_book = "completed" ORDER BY updated_at DESC';
             // console.log("SQL Query:", sql);
             db.query(sql, [readerId], (err, results) => {
